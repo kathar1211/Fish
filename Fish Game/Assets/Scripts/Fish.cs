@@ -17,17 +17,17 @@ public class Fish : MonoBehaviour
     [SerializeField]
     private string _desc;
 
-    protected void setName()
+    protected void setName(string name)
     {
-
+        _name = name;
     }
-    protected void setRarity()
+    protected void setRarity(int rarity)
     {
-
+        _rarity = rarity;
     }
-    protected void setDescription()
+    protected void setDescription(string description)
     {
-
+        _desc = description;
     }
 }
 
