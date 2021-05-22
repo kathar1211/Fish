@@ -46,10 +46,6 @@ public class Catalog : MonoBehaviour
         foreach (var item in fishList)
         {
 
-            if (item.isCaught)
-            {
-                panelList[item.posInList].GetComponent<Image>().sprite = item._fishSprite;
-            }
         }
     }
 }
