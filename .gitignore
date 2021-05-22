@@ -22,6 +22,7 @@ Fish Game/Library/metadata/**
 Fish Game/Library/ShaderCache/**
 Fish Game/Library/PlayerDataCache/**
 Fish Game/Library/PackageCache/**
+Fish Game/Library/StateCache/**
 Fish Game/Library/Artifacts/**
 Fish Game/Temp/**
 *.meta
