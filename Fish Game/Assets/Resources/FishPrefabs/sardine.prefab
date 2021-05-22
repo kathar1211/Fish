@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5721508771479118186}
   - component: {fileID: 2048566469794505684}
   m_Layer: 0
-  m_Name: FISH
-  m_TagString: Untagged
+  m_Name: sardine
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fishSprite: {fileID: 0}
-  _name: 
+  _name: Sardine
   _rarity: 0
   _desc: 
-  posInList: 0
+  posInList: 11
   isCaught: 0
