@@ -6,33 +6,19 @@ using UnityEngine;
 /// Basic fish functionality, rarity, sprite, etc.
 /// </summary>
 
-public class Fish : MonoBehaviour
+[CreateAssetMenu(fileName ="New Fish", menuName = "Fish")]
+public class Fish : ScriptableObject
 {
     public Sprite _fishSprite;
-    [SerializeField]
-    private string _name;
+    public string _name;
     //rarity will go from 1-10. 1 is least rare, 10 is most rare. figured this is easiest since we have 22 fish
-    [SerializeField]
-    private int _rarity;
-    [SerializeField]
-    private string _desc;
-    [SerializeField]
-    public int posInList;
-
-    public bool isCaught;
-
-    protected void setName(string name)
-    {
-        _name = name;
-    }
-    protected void setRarity(int rarity)
-    {
-        _rarity = rarity;
-    }
-    protected void setDescription(string description)
-    {
-        _desc = description;
-    }
+    [Range(1,10)]
+    public int _rarity;
+    public string _desc;
+    //how fast do fish swim in the water
+    public float _swimSpeed;
+    //how many back and forths does this fish do before it despawns
+    public int _swimDuration;
 }
 
 
