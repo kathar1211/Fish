@@ -19,7 +19,8 @@ public class FishObject : MonoBehaviour
     private FishState CurrentState;
 
     //reference to the sprite used when fish are still in the water
-    private SpriteRenderer ShadowSprite;
+    //this sprite is made of multiple sprite components
+    private SpriteRenderer[] ShadowSprites;
 
     //keep track of which way the fish is swimming
     private Vector3 direction;
@@ -29,9 +30,12 @@ public class FishObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShadowSprite = this.GetComponent<SpriteRenderer>();
+        ShadowSprites = this.GetComponentsInChildren<SpriteRenderer>();
         CurrentState = FishState.Spawning;
-        ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, 0); //start fish as transparent so they can fade in
+        foreach (SpriteRenderer ShadowSprite in ShadowSprites)
+        {
+            ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, 0); //start fish as transparent so they can fade in
+        }
     }
 
     // Update is called once per frame
@@ -69,30 +73,49 @@ public class FishObject : MonoBehaviour
         SwimSpeed = data._swimSpeed;
         SwimDuration = data._swimDuration;
         Rarity = data._rarity;
+
+        SetStartState();
+    }
+
+    //this wasnt working in start so we're calling it after setup now
+    private void SetStartState()
+    {
+        ShadowSprites = this.GetComponentsInChildren<SpriteRenderer>();
+        CurrentState = FishState.Spawning;
+        foreach (SpriteRenderer ShadowSprite in ShadowSprites)
+        {
+            ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, 0); //start fish as transparent so they can fade in
+        }
     }
 
     //when fish is first spawned gradually appear
     void FadeIn()
     {
-        //increase the alpha slightly each frame
-        ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, ShadowSprite.color.a + .1f);
-        //once we're at full opacity start swimming
-        if (ShadowSprite.color.a >= 1)
+        foreach (SpriteRenderer ShadowSprite in ShadowSprites)
         {
-            CurrentState = FishState.Swimming;
+            //increase the alpha slightly each frame
+            ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, ShadowSprite.color.a + .01f);
+            //once we're at full opacity start swimming
+            if (ShadowSprite.color.a >= 1)
+            {
+                CurrentState = FishState.Swimming;
+            }
         }
     }
 
     //make an exit when fish's time on earth is up
     void FadeOut()
     {
-        //decrease the alpha slightly each frame
-        ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, ShadowSprite.color.a - .1f);
-        //once we're at full transparency we're gone
-        if (ShadowSprite.color.a >= 1)
+        foreach (SpriteRenderer ShadowSprite in ShadowSprites)
         {
-            if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
-            Object.Destroy(this);
+            //decrease the alpha slightly each frame
+            ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, ShadowSprite.color.a - .01f);
+            //once we're at full transparency we're gone
+            if (ShadowSprite.color.a >= 1)
+            {
+                if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
+                Object.Destroy(this);
+            }
         }
     }
 
@@ -106,14 +129,10 @@ public class FishObject : MonoBehaviour
     //true to set up the fish to swim left, false for right
     public void SetDirectionLeft(bool left)
     {
-        if (left)
-        {
-            direction = Vector3.left;           
-        }
-        else
-        {
-            direction = Vector3.right;
-        }
-        transform.rotation = Quaternion.LookRotation(direction);
+        //i dont like these weird hard coded rotations but unfortunately our sprites are not oriented the way unity wants (up vector is forward vector)
+        Vector3 angles = new Vector3(90, 0, -90);
+        if (left) { angles.z *= -1; }
+        transform.rotation = Quaternion.Euler(angles);
+        direction = transform.forward *-1;
     }
 }
