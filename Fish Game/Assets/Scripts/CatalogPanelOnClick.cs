@@ -10,6 +10,7 @@ public class CatalogPanelOnClick : MonoBehaviour
     public GameObject panel;
     public GameObject content;
     public Button exitCatalogButton;
+    public Button exitPanelButton;
     public Text nameText;
     public Image fishSprite;
     public Text description;
@@ -20,6 +21,7 @@ public class CatalogPanelOnClick : MonoBehaviour
         panel = GameObject.Find("PopupPanel");
         content = GameObject.Find("Content");
         exitCatalogButton = GameObject.Find("ExitButton").GetComponent<Button>();
+        exitPanelButton = GameObject.Find("PopupExitButton").GetComponent<Button>();
     }
 
 
@@ -36,6 +38,8 @@ public class CatalogPanelOnClick : MonoBehaviour
         content.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
         exitCatalogButton.interactable = false;
+        exitPanelButton.gameObject.SetActive(true);
+
 
 
     }
@@ -50,6 +54,9 @@ public class CatalogPanelOnClick : MonoBehaviour
         content.gameObject.GetComponent<CanvasGroup>().alpha = 1;
         content.gameObject.GetComponent<CanvasGroup>().interactable = true;
         content.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        exitCatalogButton.interactable = true;
+        gameObject.SetActive(false);
     }
 }
 
