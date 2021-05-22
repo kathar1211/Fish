@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scripts\Fish.cs" />
      <Compile Include="Assets\Scripts\FishDisplay.cs" />
      <Compile Include="Assets\Scripts\Catalog.cs" />
+     <Compile Include="Assets\Scripts\Bobber.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
