@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e2468e2df9e80d3458194aca1c5cfb0f
+guid: 3cd1e25066d279049bed6e541261c53d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -102,7 +102,7 @@ ScriptedImporter:
       y: 1145
       width: 667
       height: 816
-    spriteID: a424c18181e3b4d48bc09eb50a559feb
+    spriteID: 6c2a66370dc4a614187ffde968a78cf1
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -124,7 +124,7 @@ ScriptedImporter:
       y: 4
       width: 1016
       height: 1133
-    spriteID: 1712db70dc9c92e4c941d42c7e6e343b
+    spriteID: 6efdf9cc2f9b14348969b80a3e8c8aee
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -146,7 +146,7 @@ ScriptedImporter:
       y: 2166
       width: 1517
       height: 1484
-    spriteID: 04e38cfa539ad8f44a72d79190379dc3
+    spriteID: c71da39cfe806394d9161999ea36d93d
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -168,7 +168,7 @@ ScriptedImporter:
       y: 4
       width: 2103
       height: 2154
-    spriteID: 6801a2e6f5169b748991875ea69f8075
+    spriteID: baad6e83b5f279441b7f3aa1f711ed65
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -202,28 +202,28 @@ ScriptedImporter:
     spriteName: Ripple_2
     isGroup: 0
     parentIndex: -1
-    spriteID: a424c18181e3b4d48bc09eb50a559feb
+    spriteID: 6c2a66370dc4a614187ffde968a78cf1
     layerID: 6
     mosaicPosition: {x: 2115, y: 1145}
   - name: Ripple_3
     spriteName: Ripple_3
     isGroup: 0
     parentIndex: -1
-    spriteID: 1712db70dc9c92e4c941d42c7e6e343b
+    spriteID: 6efdf9cc2f9b14348969b80a3e8c8aee
     layerID: 5
     mosaicPosition: {x: 2115, y: 4}
   - name: Ripple_4
     spriteName: Ripple_4
     isGroup: 0
     parentIndex: -1
-    spriteID: 04e38cfa539ad8f44a72d79190379dc3
+    spriteID: c71da39cfe806394d9161999ea36d93d
     layerID: 4
     mosaicPosition: {x: 4, y: 2166}
   - name: Ripple_5
     spriteName: Ripple_5
     isGroup: 0
     parentIndex: -1
-    spriteID: 6801a2e6f5169b748991875ea69f8075
+    spriteID: baad6e83b5f279441b7f3aa1f711ed65
     layerID: 2
     mosaicPosition: {x: 4, y: 4}
   characterData:
