@@ -49,7 +49,7 @@ public class Catalog : MonoBehaviour
         {
             fishCaughtList.Add(fishCaught._name);
             //change sprite of corresponding panel to the fish's sprite rather than silhouette
-            switch (fishCaught.name)
+            switch (fishCaught._name)
             {
                 case "Salmon":
                     panelList[11].GetComponent<Image>().sprite = fishCaught._fishSprite;
