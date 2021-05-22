@@ -30,9 +30,6 @@ public class Buttons : MonoBehaviour
 
     public void onCatalogMenuButtonClick()
     {
-        //for testing, delete this after
-        catalog.gameObject.GetComponent<Catalog>().FishCaught("Salmon");
-        //for testing delete this after
         catalogButton.SetActive(false);
         catalog.alpha = 1f;
         catalog.blocksRaycasts = true;
