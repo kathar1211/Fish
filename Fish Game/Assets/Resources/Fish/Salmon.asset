@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 832387ccfb81ee5499fc459ad315154b, type: 3}
+  m_Script: {fileID: 11500000, guid: 7864e664a2e4e624e8e7e80248585260, type: 3}
   m_Name: Salmon
   m_EditorClassIdentifier: 
   _fishSprite: {fileID: 0}
   _name: Salmon
-  _rarity: 0
-  _desc: glub glub
-  _swimSpeed: 0
-  _swimDuration: 0
+  _rarity: 5
+  _desc: its pink bitch
+  _swimSpeed: 2
+  _swimDuration: 3
