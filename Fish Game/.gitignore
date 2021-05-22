@@ -26,7 +26,6 @@ Library/Artifacts/**
 .vs/**
 Temp/**
 Debug/**
-*.meta
 *.bin
 
 #Files that are too large to be allowed
