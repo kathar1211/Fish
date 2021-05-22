@@ -13,10 +13,13 @@ public class Bobber : MonoBehaviour
     public float planeY;
 
     public GameObject castPoint;
+    public GameObject rotationPoint;
     
     public SpriteRenderer castGauge;
     float castCharge = 6;
     bool chargeUp = true;
+
+    float reelSpeed = 0.01f;
 
     void Start() {
         castGauge.color = Color.blue;
@@ -26,6 +29,15 @@ public class Bobber : MonoBehaviour
     void Update()
     {
         CastPosition();
+
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            reelSpeed += 0.001f;
+        }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            reelSpeed -= 0.001f;
+        }
 
         if(Input.GetMouseButton(0))
         {
@@ -66,12 +78,13 @@ public class Bobber : MonoBehaviour
 
         Color col = new Color(castCharge/18,.5f,.5f);
         castGauge.color = col;
-        Debug.Log(castCharge);
     }
 
     void CastOut()
     {
-        bobber.transform.position += Vector3.forward * castCharge;
+        Vector3 cast = Vector3.forward * castCharge;
+        cast.y = bobber.transform.position.y * -1;
+        bobber.transform.position += cast;
     }
 
     void CastPosition()
@@ -89,21 +102,29 @@ public class Bobber : MonoBehaviour
         newPos *= .005f;
         newPos.y = 0f; */
 
-        Vector3 currentCastPos = castPoint.transform.position;
-        Vector3 newPos = Vector3.zero;
+        //Vector3 currentCastPos = castPoint.transform.position;
+        //Vector3 newPos = Vector3.zero;
+        Vector3 rotationZ = rotationPoint.transform.localEulerAngles;
         if(Input.GetKey(KeyCode.Q))
         {
-            newPos = Vector3.left;
+            //newPos = Vector3.left;
+            //Rotate Positive Z
+            rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f,.05f);
         }
         if(Input.GetKey(KeyCode.E))
         {
-            newPos = Vector3.right;
+            //newPos = Vector3.right;
+            //Rotate Negative Z
+            rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f,-.05f);
         }
+        if(rotationZ.z > 20 && rotationZ.z < 300) {rotationZ.z = 20;}
+        if(rotationZ.z < 340 && rotationZ.z > 60) {rotationZ.z = 340;}
+        rotationPoint.transform.localEulerAngles = rotationZ;
 
-        newPos *= .01f;
-        newPos.y = 0f;
+        //newPos *= .01f;
+        //newPos.y = 0f;
 
-        castPoint.transform.position += newPos;
+        //castPoint.transform.position += newPos;
     }
 
     void Reel()
@@ -113,8 +134,12 @@ public class Bobber : MonoBehaviour
 
         Vector3 newPos = castPos - currentBobberPos;
         newPos.Normalize();
-        newPos *= .005f;
-        newPos.y = 0f;
+
+
+
+        reelSpeed = Mathf.Clamp(reelSpeed, .001f, .02f);
+        newPos *= reelSpeed;
+        //newPos.y = 0f;
 
         bobber.transform.position += newPos;
     }
