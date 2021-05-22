@@ -22,11 +22,17 @@ public class CatalogPanelOnClick : MonoBehaviour
         content = GameObject.Find("Content");
         exitCatalogButton = GameObject.Find("ExitButton").GetComponent<Button>();
         exitPanelButton = GameObject.Find("PopupExitButton").GetComponent<Button>();
+
+        nameText.text = "You have not discovered this fish yet!";
+        description.text = "You have not discovered this fish yet!";
+
     }
 
 
     public void panelOnClick()
     {
+
+
 
         scrollbar.interactable = false;
         panel.gameObject.GetComponent<CanvasGroup>().alpha = 1;
@@ -40,7 +46,7 @@ public class CatalogPanelOnClick : MonoBehaviour
         exitCatalogButton.interactable = false;
         exitPanelButton.gameObject.SetActive(true);
 
-
+        
 
     }
 

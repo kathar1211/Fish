@@ -9,7 +9,10 @@ public class Catalog : MonoBehaviour
 
     public List<string> fishCaughtList;
     public List<GameObject> panelList;
+    public Object[] fishList;
     public GameObject fishPanel;
+
+    public int index;
 
     public Sprite silhouette;
 
@@ -25,6 +28,7 @@ public class Catalog : MonoBehaviour
     /// </summary>
     public void InitializePanel()
     {
+        index = 0;
         for (int i = 0; i < 23; i++)
         {
             Debug.Log(i);
@@ -32,6 +36,11 @@ public class Catalog : MonoBehaviour
             panelList[i].GetComponent<Image>().sprite = silhouette;
 
         }
+
+        fishList = Resources.FindObjectsOfTypeAll(typeof(Fish));
+
+
+
     }
 
     /// <summary>
@@ -48,8 +57,16 @@ public class Catalog : MonoBehaviour
         if (fishCaughtList.Contains(fishCaught._name)==false)
         {
             fishCaughtList.Add(fishCaught._name);
+
+            panelList[index].GetComponent<Image>().sprite = fishCaught._fishSprite;
+            panelList[index].GetComponent<CatalogPanelOnClick>().nameText.text = fishCaught._name;
+            panelList[index].GetComponent<CatalogPanelOnClick>().fishSprite.sprite = fishCaught._fishSprite;
+            panelList[index].GetComponent<CatalogPanelOnClick>().description.text = fishCaught._desc;
+
+            index++;
+
             //change sprite of corresponding panel to the fish's sprite rather than silhouette
-            switch (fishCaught._name)
+            /*switch (fishCaught._name)
             {
                 case "Salmon":
                     panelList[11].GetComponent<Image>().sprite = fishCaught._fishSprite;
@@ -118,6 +135,7 @@ public class Catalog : MonoBehaviour
                     panelList[14].GetComponent<Image>().sprite = fishCaught._fishSprite;
                     break;
             }
+            */
 
             if (fishCaughtList.Count==22)
             {
