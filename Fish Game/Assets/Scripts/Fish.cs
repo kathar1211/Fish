@@ -16,6 +16,10 @@ public class Fish : MonoBehaviour
     private int _rarity;
     [SerializeField]
     private string _desc;
+    [SerializeField]
+    public int posInList;
+
+    public bool isCaught;
 
     protected void setName(string name)
     {
