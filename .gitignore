@@ -25,6 +25,7 @@ Fish Game/Library/PackageCache/**
 Fish Game/Library/StateCache/**
 Fish Game/Library/Artifacts/**
 Fish Game/Temp/**
+Fish Game/Library/
 *.meta
 *.bin
 
