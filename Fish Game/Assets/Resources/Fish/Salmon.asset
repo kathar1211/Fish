@@ -16,3 +16,5 @@ MonoBehaviour:
   _name: Salmon
   _rarity: 0
   _desc: glub glub
+  _swimSpeed: 0
+  _swimDuration: 0
