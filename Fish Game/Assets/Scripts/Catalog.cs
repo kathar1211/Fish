@@ -40,11 +40,21 @@ public class Catalog : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// runs every time a fish is caught
+    /// </summary>
+    /// <param name="fishCaught"></param>
     public void fishCaught(Fish fishCaught)
     {
-        fishCaughtList.Add(fishCaught._name);
-        if (fishCaughtList.Contains(fishCaught._name))
+
+        //insert animation where fish gets added to catalog?
+        
+
+        //if the fish caught is not in the list of fish that have already been caught
+        if (fishCaughtList.Contains(fishCaught._name)==false)
         {
+            fishCaughtList.Add(fishCaught._name);
+            //change sprite of corresponding panel to the fish's sprite rather than silhouette
             switch (fishCaught.name)
             {
                 case "Salmon":
@@ -114,7 +124,16 @@ public class Catalog : MonoBehaviour
                     panelList[14].GetComponent<Image>().sprite = fishCaught._fishSprite;
                     break;
             }
+
+            if (fishCaughtList.Count==22)
+            {
+                //game win condition
+            }
+
         }
+
+        
+
     }
 
 }
