@@ -120,7 +120,7 @@ public class Catalog : MonoBehaviour
 
             if (fishCaughtList.Count==22)
             {
-                //game win condition
+                GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManage>().onGameEnd();
             }
 
         }
