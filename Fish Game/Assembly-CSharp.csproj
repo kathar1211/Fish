@@ -54,9 +54,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Catalog.cs" />
-    <Compile Include="Assets\Scripts\Bobber.cs" />
     <Compile Include="Assets\Scripts\Fish.cs" />
     <Compile Include="Assets\Scripts\FishDisplay.cs" />
+    <Compile Include="Assets\Scripts\Bobber.cs" />
     <Compile Include="Assets\Scripts\FishObject.cs" />
     <Compile Include="Assets\Scripts\SceneManager.cs" />
     <Compile Include="Assets\SceneManage.cs" />
