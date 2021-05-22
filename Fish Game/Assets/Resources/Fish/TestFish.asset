@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestFish
   m_EditorClassIdentifier: 
   _fishSprite: {fileID: 0}
-  _name: 
-  _rarity: 0
-  _desc: 
-  _swimSpeed: 0
-  _swimDuration: 0
+  _name: test
+  _rarity: 1
+  _desc: this fish will always spawn
+  _swimSpeed: 1
+  _swimDuration: 10

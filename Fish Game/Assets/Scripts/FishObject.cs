@@ -60,6 +60,9 @@ public class FishObject : MonoBehaviour
     //assign this fish values from the fish template
     public void SetupFish(Fish data)
     {
+        //this shouldnt happen but just in case
+        if (data == null) { return; }
+
         CaughtSprite = data._fishSprite;
         Name = data._name;
         Description = data._desc;
@@ -88,6 +91,7 @@ public class FishObject : MonoBehaviour
         //once we're at full transparency we're gone
         if (ShadowSprite.color.a >= 1)
         {
+            if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
             Object.Destroy(this);
         }
     }
@@ -97,5 +101,19 @@ public class FishObject : MonoBehaviour
     {
         transform.Translate(direction * SwimSpeed * Time.deltaTime);
         //todo: when we reach a certain position (edge of water), increment swim counter, then either turn around or despawn
+    }
+
+    //true to set up the fish to swim left, false for right
+    public void SetDirectionLeft(bool left)
+    {
+        if (left)
+        {
+            direction = Vector3.left;           
+        }
+        else
+        {
+            direction = Vector3.right;
+        }
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 }
