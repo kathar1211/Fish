@@ -26,7 +26,6 @@ Fish Game/Library/StateCache/**
 Fish Game/Library/Artifacts/**
 Fish Game/Temp/**
 Fish Game/Library/
-*.meta
 *.bin
 
 #Files that are too large to be allowed
