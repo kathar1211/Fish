@@ -15,7 +15,7 @@ public class FishObject : MonoBehaviour
     private int Rarity;
 
     //keep track of what the fish is doing
-    public enum FishState {Spawning, Swimming, Turning, Caught, Despawning };
+    public enum FishState {Spawning, Swimming, Turning, Caught, Despawning, PreBiting, Biting };
     private FishState CurrentState;
 
     //reference to the sprite used when fish are still in the water
@@ -50,6 +50,7 @@ public class FishObject : MonoBehaviour
                 Swim();
                 break;
             case FishState.Turning:
+                TurnAround();
                 break;
             case FishState.Caught:
                 break;
@@ -111,10 +112,10 @@ public class FishObject : MonoBehaviour
             //decrease the alpha slightly each frame
             ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, ShadowSprite.color.a - .01f);
             //once we're at full transparency we're gone
-            if (ShadowSprite.color.a >= 1)
+            if (ShadowSprite.color.a <= 0)
             {
                 if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
-                Object.Destroy(this);
+                Object.Destroy(this.gameObject);
             }
         }
     }
@@ -122,7 +123,7 @@ public class FishObject : MonoBehaviour
     //move forward at swim speed
     void Swim()
     {
-        transform.Translate(direction * SwimSpeed * Time.deltaTime);
+        transform.Translate(direction * SwimSpeed * Time.deltaTime, Space.World);
         //todo: when we reach a certain position (edge of water), increment swim counter, then either turn around or despawn
     }
 
@@ -130,9 +131,51 @@ public class FishObject : MonoBehaviour
     public void SetDirectionLeft(bool left)
     {
         //i dont like these weird hard coded rotations but unfortunately our sprites are not oriented the way unity wants (up vector is forward vector)
-        Vector3 angles = new Vector3(90, 0, -90);
+        Vector3 angles = new Vector3(-90, 0, -90);
         if (left) { angles.z *= -1; }
         transform.rotation = Quaternion.Euler(angles);
-        direction = transform.forward *-1;
+
+        if (left) { direction = Vector3.left; }
+        if (!left) { direction = Vector3.right; }
+    }
+
+    //edge of the water has trigger colliders to notify fish when they're approaching the edge
+    private void OnTriggerEnter(Collider other)
+    {
+        //if we've reached a boundary, reverse desired direction and start turning
+        if (other.tag == "WaterBoundaries" && CurrentState == FishState.Swimming)
+        {
+            //increment how many times we've crossed the water and check if we've reached the limit
+            swimCounter++;
+            if (swimCounter >= SwimDuration)
+            {
+                CurrentState = FishState.Despawning;
+                return;
+            }
+
+            direction *= -1;
+            CurrentState = FishState.Turning;
+        }
+    }
+
+    //turn until direction lines up
+    void TurnAround()
+    {
+        //rotate about world up axis as a function of rotate speed
+        //transform.RotateAround(transform.position, Vector3.up, SwimSpeed * Time.deltaTime * 100);
+        transform.Rotate(new Vector3(0,0, SwimSpeed * Time.deltaTime * 100));
+
+        //if we're very close to matching the target direction, snap to position and keep swimming
+        //because of wacky rotations we're using our up vector as a forward vector
+        //the dot product of our "forward" vector and our target direction will give us the cos of the angle between them
+        //if the angle is 0 degrees, the dot product will be 1. if the dot product is .9, the angle is pretty close to 0 degrees
+        if (Vector3.Dot(direction, transform.up) >= .99)
+        {
+            //transform.up = direction;
+            //transform.forward = Vector3.up;
+            transform.rotation = Quaternion.LookRotation(Vector3.up, direction);
+            CurrentState = FishState.Swimming;
+        }
+
     }
 }

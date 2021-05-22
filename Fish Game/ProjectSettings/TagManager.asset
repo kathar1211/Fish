@@ -8,11 +8,12 @@ TagManager:
   - Catalog
   - ExitButton
   - CatalogButton
+  - WaterBoundaries
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Fish
   - Water
   - UI
   - 
