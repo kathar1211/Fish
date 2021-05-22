@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Catalog : MonoBehaviour
 {
@@ -120,7 +121,7 @@ public class Catalog : MonoBehaviour
 
             if (fishCaughtList.Count==22)
             {
-                GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManage>().onGameEnd();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
             }
 
         }
