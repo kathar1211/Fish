@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Salmon
   m_EditorClassIdentifier: 
   _fishSprite: {fileID: 0}
-  _name: 
+  _name: Salmon
   _rarity: 0
-  _desc: 
+  _desc: glub glub
