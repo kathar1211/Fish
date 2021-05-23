@@ -26,20 +26,24 @@ public class FishingRod : MonoBehaviour
     float castIncrement = 0;
 
     float reelSpeed = 0.02f;
+    public KeyCode reelButton;
+    float reelIncrement;
 
     void Start() {
         castGauge.color = Color.white;
+        reelButton = KeyCode.Q;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(rodState);
         if(rodState == FishingRodState.Casting)
         {
             if(castIncrement < 1)
             {
                 castIncrement += Time.deltaTime * 1f;
-                bobber.transform.position = Vector3.Lerp(castStart, castEnd, castIncrement);
+                bobber.transform.position = Vector3.Lerp(castStart, castEnd, castIncrement) + (Vector3.up * 10 * (1 - castIncrement));
             }
             else
             {
@@ -48,6 +52,10 @@ public class FishingRod : MonoBehaviour
             }
         }
 
+        Debug.Log(reelButton + " : " + reelIncrement);
+        reelIncrement += Time.deltaTime * 1f;
+        if((int)reelIncrement%2 == 0) { reelButton = KeyCode.Q; }
+        else { reelButton = KeyCode.E; }
         if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
         {
             Reel();
@@ -108,19 +116,23 @@ public class FishingRod : MonoBehaviour
 
     void Reel()
     {
+        bool correctKey = false;
+
         //Wiggle
         Vector3 rotationZ = rotationPoint.transform.localEulerAngles;
-        if(Input.GetKey(KeyCode.Q))
+        if(Input.GetKey(KeyCode.Q) && reelButton == KeyCode.Q)
         {
             //newPos = Vector3.left;
             //Rotate Positive Z
             rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f,.05f);
+            correctKey = true;
         }
-        if(Input.GetKey(KeyCode.E))
+        if(Input.GetKey(KeyCode.E) && reelButton == KeyCode.E)
         {
             //newPos = Vector3.right;
             //Rotate Negative Z
             rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f,-.05f);
+            correctKey = true;
         }
         if(rotationZ.z > 2 && rotationZ.z < 300) {rotationZ.z = 2;}
         if(rotationZ.z < 358 && rotationZ.z > 60) {rotationZ.z = 358;}
@@ -138,6 +150,6 @@ public class FishingRod : MonoBehaviour
             newPos.y = 0f;
         }
 
-        bobber.transform.position += newPos;
+        if(correctKey) { bobber.transform.position += newPos; }
     }
 }

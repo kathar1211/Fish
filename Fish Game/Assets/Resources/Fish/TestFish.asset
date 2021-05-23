@@ -18,3 +18,7 @@ MonoBehaviour:
   _desc: fish with a hundo percent chance to spawn
   _swimSpeed: 1
   _swimDuration: 5
+  _starCount: 0
+  _minNibbleTime: 0.1
+  _maxNibbleTime: 3
+  _biteWindow: 2

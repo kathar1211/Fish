@@ -29,7 +29,7 @@ public class Catalog : MonoBehaviour
     public void InitializePanel()
     {
         index = 0;
-        for (int i = 0; i < 23; i++)
+        for (int i = 0; i < panelList.Count; i++)
         {
             Debug.Log(i);
             panelList[i] = GameObject.Find("FishPos1 ("+i+")");
