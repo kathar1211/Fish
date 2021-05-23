@@ -21,6 +21,12 @@ public class Fish : ScriptableObject
     public int _swimDuration;
     [Range(1,3)]
     public int _starCount;
+    //minimum amount of time (in seconds) the fish will consider biting 
+    public float _minNibbleTime;
+    //maximum amount of time (in seconds) the fish will consider biting
+    public float _maxNibbleTime;
+    //how long does the player have to start reeling in the fish before it gets away (also in seconds)
+    public float _biteWindow;
 }
 
 

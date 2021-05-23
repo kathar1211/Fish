@@ -15,7 +15,7 @@ public class FishObject : MonoBehaviour
     private int Rarity;
 
     //keep track of what the fish is doing
-    public enum FishState {Spawning, Swimming, Turning, Caught, Despawning, PreBiting, Biting };
+    public enum FishState {Spawning, Swimming, Turning, Caught, Escaped, Despawning, PreBiting, Biting };
     private FishState CurrentState;
 
     //reference to the sprite used when fish are still in the water
@@ -26,6 +26,19 @@ public class FishObject : MonoBehaviour
     private Vector3 direction;
     //keep track of how many times we've swam across the pond
     private int swimCounter;
+
+    //minimum amount of time (in seconds) the fish will consider biting 
+    public float MinNibbleTime;
+    //maximum amount of time (in seconds) the fish will consider biting
+    public float MaxNibbleTime;
+    //how long does the player have to start reeling in the fish before it gets away (also in seconds)
+    public float BiteWindow;
+
+    //how long will the fish actually consider biting;
+    private float NibbleTime;
+
+    //used to keep track of the passge of time when fish has started nibbling or biting
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +70,15 @@ public class FishObject : MonoBehaviour
             case FishState.Despawning:
                 FadeOut();
                 break;
+            case FishState.Escaped:
+                SwimAndFadeOut();
+                break;
+            case FishState.PreBiting:
+                ThinkingAboutBiting();
+                break;
+            case FishState.Biting:
+                Biting();
+                break;
             default:
                 break;
         }
@@ -74,6 +96,9 @@ public class FishObject : MonoBehaviour
         SwimSpeed = data._swimSpeed;
         SwimDuration = data._swimDuration;
         Rarity = data._rarity;
+        BiteWindow = data._biteWindow;
+        MinNibbleTime = data._minNibbleTime;
+        MaxNibbleTime = data._maxNibbleTime;
 
         SetStartState();
     }
@@ -156,6 +181,17 @@ public class FishObject : MonoBehaviour
             direction *= -1;
             CurrentState = FishState.Turning;
         }
+
+        //when we hit the bobber, start the pre biting phase
+        else if (other.tag == "Bobber" && CurrentState == FishState.Swimming)
+        {
+            //the fish will "think" about biting for some amount of time between min and max nibble time before biting
+            //set that time here
+            NibbleTime = Random.Range(MinNibbleTime, MaxNibbleTime);
+            //reset the timer, enter the nibble phase, and wait
+            timer = 0;
+            CurrentState = FishState.PreBiting;
+        }
     }
 
     //turn until direction lines up
@@ -175,7 +211,54 @@ public class FishObject : MonoBehaviour
             //transform.forward = Vector3.up;
             transform.rotation = Quaternion.LookRotation(Vector3.up, direction);
             CurrentState = FishState.Swimming;
+            //todo: trigger the appropriate bobber animation here?
+            Debug.Log(Name + "is thinking about biting");
         }
 
+    }
+
+    void SwimAndFadeOut()
+    {
+        //if the fish got away, it swims forward while fading to transparent
+        Swim();
+        FadeOut();
+        //this maybe didnt need to be its own method huh
+    }
+
+    //before the fish bites, it hovers in front of the bobber for some amount of time
+    void ThinkingAboutBiting()
+    {
+        //increment timer
+        timer += Time.deltaTime;
+
+        //check if it's time to bite
+        if (timer >= NibbleTime)
+        {
+            timer = 0;
+            CurrentState = FishState.Biting;
+            //todo: update bobber animation here?
+            Debug.Log(Name + " is biting");
+        }
+    }
+
+    //bite the bobber for an amount of time, then either get caught or get away
+    void Biting()
+    {
+        //increment timer
+        timer += Time.deltaTime;
+
+        //check for input (TEMP)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CurrentState = FishState.Caught;
+            Debug.Log("You caught a " + Name);
+        }
+
+        //check if we've gotten away yet
+        if (timer >= BiteWindow)
+        {
+            CurrentState = FishState.Escaped;
+            Debug.Log(Name + "got away...");
+        }
     }
 }
