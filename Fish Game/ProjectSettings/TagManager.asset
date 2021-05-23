@@ -9,6 +9,7 @@ TagManager:
   - ExitButton
   - CatalogButton
   - WaterBoundaries
+  - Bobber
   layers:
   - Default
   - TransparentFX
