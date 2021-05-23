@@ -25,13 +25,16 @@ public class FishingRod : MonoBehaviour
     Vector3 castEnd;
     float castIncrement = 0;
 
-    float reelSpeed = 0.02f;
+    float reelSpeed = 0.01f;
     public KeyCode reelButton;
     float reelIncrement;
+    float reelBuffer = 0.5f;
+    float keepReeling;
 
     void Start() {
         castGauge.color = Color.white;
-        reelButton = KeyCode.Q;
+        reelButton = KeyCode.E;
+        keepReeling = 0;
     }
 
     // Update is called once per frame
@@ -52,12 +55,11 @@ public class FishingRod : MonoBehaviour
             }
         }
 
-        Debug.Log(reelButton + " : " + reelIncrement);
+        //Keep track of time passing, in case we want to switch keys, or figure out how much time has passed between clicks
         reelIncrement += Time.deltaTime * 1f;
-        if((int)reelIncrement%2 == 0) { reelButton = KeyCode.Q; }
-        else { reelButton = KeyCode.E; }
-        if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
+        if(rodState == FishingRodState.Fishing && Input.GetKeyDown(reelButton) || keepReeling > reelIncrement)
         {
+            if(Input.GetKeyDown(reelButton)) { keepReeling = reelIncrement + reelBuffer; }
             Reel();
         }
 
@@ -116,24 +118,9 @@ public class FishingRod : MonoBehaviour
 
     void Reel()
     {
-        bool correctKey = false;
-
         //Wiggle
         Vector3 rotationZ = rotationPoint.transform.localEulerAngles;
-        if(Input.GetKey(KeyCode.Q) && reelButton == KeyCode.Q)
-        {
-            //newPos = Vector3.left;
-            //Rotate Positive Z
-            rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f,.05f);
-            correctKey = true;
-        }
-        if(Input.GetKey(KeyCode.E) && reelButton == KeyCode.E)
-        {
-            //newPos = Vector3.right;
-            //Rotate Negative Z
-            rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f,-.05f);
-            correctKey = true;
-        }
+        rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f, Random.Range(-0.2f,0.2f));
         if(rotationZ.z > 2 && rotationZ.z < 300) {rotationZ.z = 2;}
         if(rotationZ.z < 358 && rotationZ.z > 60) {rotationZ.z = 358;}
         rotationPoint.transform.localEulerAngles = rotationZ;
@@ -150,6 +137,6 @@ public class FishingRod : MonoBehaviour
             newPos.y = 0f;
         }
 
-        if(correctKey) { bobber.transform.position += newPos; }
+        bobber.transform.position += newPos;
     }
 }
