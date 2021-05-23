@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7864e664a2e4e624e8e7e80248585260, type: 3}
+  m_Script: {fileID: 11500000, guid: c4284f047dff64b4a9ac24ac1e14da98, type: 3}
   m_Name: TestFish
   m_EditorClassIdentifier: 
   _fishSprite: {fileID: 0}
   _name: test
   _rarity: 1
-  _desc: this fish will always spawn
+  _desc: fish with a hundo percent chance to spawn
   _swimSpeed: 1
-  _swimDuration: 10
+  _swimDuration: 5
