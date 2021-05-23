@@ -53,7 +53,7 @@ public class FishingRod : MonoBehaviour
             Reel();
         }
 
-        if(Vector3.Distance(castPoint.transform.position,bobber.transform.position) < 1)
+        if(rodState != FishingRodState.Casting && Vector3.Distance(castPoint.transform.position,bobber.transform.position) < 1)
         {
             rodState = FishingRodState.Ready;
             if(Input.GetKey(KeyCode.Space))
