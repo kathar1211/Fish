@@ -191,6 +191,8 @@ public class FishObject : MonoBehaviour
             //reset the timer, enter the nibble phase, and wait
             timer = 0;
             CurrentState = FishState.PreBiting;
+            //todo: trigger the appropriate bobber animation here?
+            Debug.Log(Name + " is thinking about biting");
         }
     }
 
@@ -210,9 +212,7 @@ public class FishObject : MonoBehaviour
             //transform.up = direction;
             //transform.forward = Vector3.up;
             transform.rotation = Quaternion.LookRotation(Vector3.up, direction);
-            CurrentState = FishState.Swimming;
-            //todo: trigger the appropriate bobber animation here?
-            Debug.Log(Name + "is thinking about biting");
+            CurrentState = FishState.Swimming;            
         }
 
     }
@@ -258,7 +258,7 @@ public class FishObject : MonoBehaviour
         if (timer >= BiteWindow)
         {
             CurrentState = FishState.Escaped;
-            Debug.Log(Name + "got away...");
+            Debug.Log(Name + " got away...");
         }
     }
 }
