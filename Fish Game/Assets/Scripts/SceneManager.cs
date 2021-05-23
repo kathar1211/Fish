@@ -28,6 +28,9 @@ public class SceneManager : MonoBehaviour
     //scenemanager holds reference to the catalogue so fish can easily get to it
     public Catalog catalog;
 
+    //keep reference to the fishingrod
+    public FishingRod fishingRod;
+
     //Awake is called before start
     private void Awake()
     {

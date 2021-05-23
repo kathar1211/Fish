@@ -31,10 +31,14 @@ public class FishingRod : MonoBehaviour
     float reelBuffer = 0.5f;
     float keepReeling;
 
+    Vector3 initBobberPos;
+
     void Start() {
         castGauge.color = Color.white;
         reelButton = KeyCode.E;
         keepReeling = 0;
+
+        initBobberPos = bobber.transform.position;
     }
 
     // Update is called once per frame
@@ -138,5 +142,10 @@ public class FishingRod : MonoBehaviour
         }
 
         bobber.transform.position += newPos;
+    }
+
+    public void Reset()
+    {
+        //bobber.transform.position = initBobberPos;
     }
 }

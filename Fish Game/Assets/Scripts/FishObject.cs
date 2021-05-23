@@ -41,6 +41,11 @@ public class FishObject : MonoBehaviour
     //used to keep track of the passge of time when fish has started nibbling or biting
     private float timer;
 
+    //need reference to the bobber to attach self
+    private GameObject bobber;
+    //and fishing rod to check state
+    private FishingRod fishingRod;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +55,8 @@ public class FishObject : MonoBehaviour
         {
             ShadowSprite.color = new Color(ShadowSprite.color.r, ShadowSprite.color.g, ShadowSprite.color.b, 0); //start fish as transparent so they can fade in
         }
+
+        fishingRod = SceneManager.Instance.fishingRod;
     }
 
     // Update is called once per frame
@@ -67,6 +74,7 @@ public class FishObject : MonoBehaviour
                 TurnAround();
                 break;
             case FishState.Caught:
+                Reeling();
                 break;
             case FishState.Despawning:
                 FadeOut();
@@ -195,6 +203,10 @@ public class FishObject : MonoBehaviour
             CurrentState = FishState.PreBiting;
             //todo: trigger the appropriate bobber animation here?
             Debug.Log(Name + " is thinking about biting");
+            
+
+            bobber = other.gameObject;
+            bobber.GetComponent<Bobber>().PlayNibbled();
         }
     }
 
@@ -240,6 +252,7 @@ public class FishObject : MonoBehaviour
             CurrentState = FishState.Biting;
             //todo: update bobber animation here?
             Debug.Log(Name + " is biting");
+            bobber.GetComponent<Bobber>().PlayGrabbed();
         }
     }
 
@@ -249,14 +262,20 @@ public class FishObject : MonoBehaviour
         //increment timer
         timer += Time.deltaTime;
 
-        //check for input (TEMP)
-        if (Input.GetKeyDown(KeyCode.Space))
+        //check for input 
+        if (fishingRod.rodState == FishingRodState.Fishing && Input.GetKeyDown(fishingRod.reelButton))
         {
             CurrentState = FishState.Caught;
+            Debug.Log("Caught " + name);
+            SceneManager.Instance.catalog.FishCaught(FishData);
             if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
             Object.Destroy(this.gameObject);
-            //Debug.Log("You caught a " + Name);
-            SceneManager.Instance.catalog.FishCaught(FishData);
+            fishingRod.Reset();
+            //snap the fish to the bobber so it moves in with it
+            //transform.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward * -1);
+            //transform.parent = bobber.transform;
+            //we'll be generous and reset the timer too
+            //timer = 0;
         }
 
         //check if we've gotten away yet
@@ -264,6 +283,33 @@ public class FishObject : MonoBehaviour
         {
             CurrentState = FishState.Escaped;
             Debug.Log(Name + " got away...");
+            bobber.GetComponent<Bobber>().PlayIdle();
         }
     }
+
+    //when fish is being reeled in, continue to countdown the bite timer but dont check for input anymore
+    void Reeling()
+    {
+        //increment timer
+        timer += Time.deltaTime;
+
+        //check if we've gotten away yet
+        if (timer >= BiteWindow)
+        {
+            /*CurrentState = FishState.Escaped;
+            transform.parent = null;
+            transform.rotation = Quaternion.LookRotation(Vector3.up, direction);
+            Debug.Log(Name + " got away...");*/
+        }
+
+        //check if the player finished reeling in the fish
+        if (fishingRod.rodState == FishingRodState.Ready)
+        {
+            Debug.Log("Caught " + name);
+            SceneManager.Instance.catalog.FishCaught(FishData);
+            if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
+            Object.Destroy(this.gameObject);
+        }
+    }
+
 }
