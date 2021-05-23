@@ -146,6 +146,6 @@ public class FishingRod : MonoBehaviour
 
     public void Reset()
     {
-        //bobber.transform.position = initBobberPos;
+        bobber.transform.position = initBobberPos;
     }
 }

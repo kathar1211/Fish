@@ -1376,6 +1376,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BobberParent
       objectReference: {fileID: 0}
+    - target: {fileID: 6337535118957825744, guid: 46f81429b5420494baf004efeff22384, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6579529222856639226, guid: 46f81429b5420494baf004efeff22384, type: 3}
       propertyPath: m_RootOrder
       value: 1

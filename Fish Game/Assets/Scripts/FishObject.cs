@@ -271,6 +271,7 @@ public class FishObject : MonoBehaviour
             if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
             Object.Destroy(this.gameObject);
             fishingRod.Reset();
+            bobber.GetComponent<Bobber>().PlayIdle();
             //snap the fish to the bobber so it moves in with it
             //transform.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward * -1);
             //transform.parent = bobber.transform;
