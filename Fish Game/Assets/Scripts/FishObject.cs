@@ -253,6 +253,8 @@ public class FishObject : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CurrentState = FishState.Caught;
+            if (SceneManager.Instance.ActiveFish.Contains(this.gameObject)) { SceneManager.Instance.ActiveFish.Remove(this.gameObject); }
+            Object.Destroy(this.gameObject);
             //Debug.Log("You caught a " + Name);
             SceneManager.Instance.catalog.FishCaught(FishData);
         }
