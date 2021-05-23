@@ -31,7 +31,7 @@ public class Catalog : MonoBehaviour
         index = 0;
         for (int i = 0; i < panelList.Count; i++)
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             panelList[i] = GameObject.Find("FishPos1 ("+i+")");
             panelList[i].GetComponent<Image>().sprite = silhouette;
 
@@ -51,7 +51,8 @@ public class Catalog : MonoBehaviour
     {
 
         //insert animation where fish gets added to catalog?
-        
+        fishPanel.SetActive(true);
+        fishPanel.GetComponent<FishPanel>().ShowInfo(fishCaught);
 
         //if the fish caught is not in the list of fish that have already been caught
         if (fishCaughtList.Contains(fishCaught._name)==false)
@@ -150,7 +151,7 @@ public class Catalog : MonoBehaviour
             }
             */
 
-            if (fishCaughtList.Count==22)
+            if (fishCaughtList.Count==panelList.Count)
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
             }

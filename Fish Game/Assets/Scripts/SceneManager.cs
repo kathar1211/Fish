@@ -25,10 +25,14 @@ public class SceneManager : MonoBehaviour
     //keep track of how long until we can spawn another fish (in seconds)
     private float FishTimer;
 
+    //scenemanager holds reference to the catalogue so fish can easily get to it
+    public Catalog catalog;
+
     //Awake is called before start
     private void Awake()
     {
         Instance = this;
+        catalog = GameObject.FindGameObjectWithTag("Catalog").GetComponent<Catalog>();
     }
 
     // Start is called before the first frame update

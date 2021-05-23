@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4284f047dff64b4a9ac24ac1e14da98, type: 3}
   m_Name: TestFish
   m_EditorClassIdentifier: 
-  _fishSprite: {fileID: 0}
+  _fishSprite: {fileID: 21300000, guid: dd431871d44602648b4187b26181ad49, type: 3}
   _name: test
   _rarity: 1
   _desc: fish with a hundo percent chance to spawn

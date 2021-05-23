@@ -13,6 +13,7 @@ public class FishObject : MonoBehaviour
     private int SwimDuration;
     [Range(1, 10)]
     private int Rarity;
+    private Fish FishData;
 
     //keep track of what the fish is doing
     public enum FishState {Spawning, Swimming, Turning, Caught, Escaped, Despawning, PreBiting, Biting };
@@ -90,6 +91,7 @@ public class FishObject : MonoBehaviour
         //this shouldnt happen but just in case
         if (data == null) { return; }
 
+        FishData = data;
         CaughtSprite = data._fishSprite;
         Name = data._name;
         Description = data._desc;
@@ -251,7 +253,8 @@ public class FishObject : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CurrentState = FishState.Caught;
-            Debug.Log("You caught a " + Name);
+            //Debug.Log("You caught a " + Name);
+            SceneManager.Instance.catalog.FishCaught(FishData);
         }
 
         //check if we've gotten away yet

@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4284f047dff64b4a9ac24ac1e14da98, type: 3}
   m_Name: Tuna
   m_EditorClassIdentifier: 
-  _fishSprite: {fileID: 0}
-  _name: 
-  _rarity: 0
+  _fishSprite: {fileID: 21300000, guid: f6a44cda2ec32404fbb91a084bcac037, type: 3}
+  _name: Tuna
+  _rarity: 2
   _desc: 
-  _swimSpeed: 0
-  _swimDuration: 0
+  _swimSpeed: 2
+  _swimDuration: 4
+  _starCount: 3
+  _minNibbleTime: 0.1
+  _maxNibbleTime: 4
+  _biteWindow: 1
