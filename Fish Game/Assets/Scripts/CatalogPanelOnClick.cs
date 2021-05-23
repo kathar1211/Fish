@@ -35,11 +35,12 @@ public class CatalogPanelOnClick : MonoBehaviour
 
 
         scrollbar.interactable = false;
-        panel.gameObject.GetComponent<CanvasGroup>().alpha = 1;
-        panel.gameObject.GetComponent<CanvasGroup>().interactable = true;
-        panel.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        panel.gameObject.GetComponent<Animator>().SetTrigger("FlyIn");
+        content.GetComponent<Animator>().SetTrigger("FlyOut");
+        //panel.gameObject.GetComponent<CanvasGroup>().alpha = 1;
+        //panel.gameObject.GetComponent<CanvasGroup>().interactable = true;
+        //panel.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        content.gameObject.GetComponent<CanvasGroup>().alpha = 0;
         content.gameObject.GetComponent<CanvasGroup>().interactable = false;
         content.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
@@ -53,11 +54,12 @@ public class CatalogPanelOnClick : MonoBehaviour
     public void onExitButtonClick()
     {
         scrollbar.interactable = true;
-        panel.gameObject.GetComponent<CanvasGroup>().alpha = 0;
-        panel.gameObject.GetComponent<CanvasGroup>().interactable = false;
-        panel.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        panel.gameObject.GetComponent<Animator>().SetTrigger("FlyOut");
+        content.GetComponent<Animator>().SetTrigger("FlyIn");
+        //panel.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+        //panel.gameObject.GetComponent<CanvasGroup>().interactable = false;
+        //panel.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
-        content.gameObject.GetComponent<CanvasGroup>().alpha = 1;
         content.gameObject.GetComponent<CanvasGroup>().interactable = true;
         content.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
