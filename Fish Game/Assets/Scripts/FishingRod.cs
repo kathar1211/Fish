@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bobber : MonoBehaviour
-{
+public enum FishingRodState { Ready, Casting, Fishing, Reeling}
 
+public class FishingRod : MonoBehaviour
+{
+    public FishingRodState rodState;
     public GameObject bobber;
-    public float minX;
-    public float maxX;
+    public float planeX;
     public float minZ;
     public float maxZ;
     public float planeY;
@@ -16,36 +17,45 @@ public class Bobber : MonoBehaviour
     public GameObject rotationPoint;
     
     public SpriteRenderer castGauge;
-    float castCharge = 6;
+    float castCharge = 0;
+    float maxCastCharge = 50;
+    float minCastCharge = 5;
     bool chargeUp = true;
+    Vector3 castStart;
+    Vector3 castEnd;
+    float castIncrement = 0;
 
-    float reelSpeed = 0.01f;
+    float reelSpeed = 0.02f;
 
     void Start() {
-        castGauge.color = Color.blue;
+        castGauge.color = Color.white;
     }
 
     // Update is called once per frame
     void Update()
     {
-        CastPosition();
-
-        if(Input.GetKeyDown(KeyCode.W))
+        if(rodState == FishingRodState.Casting)
         {
-            reelSpeed += 0.001f;
-        }
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            reelSpeed -= 0.001f;
+            if(castIncrement < 1)
+            {
+                castIncrement += Time.deltaTime * 1f;
+                bobber.transform.position = Vector3.Lerp(castStart, castEnd, castIncrement);
+            }
+            else
+            {
+                rodState = FishingRodState.Fishing;
+                castIncrement = 0;
+            }
         }
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
         {
             Reel();
         }
 
         if(Vector3.Distance(castPoint.transform.position,bobber.transform.position) < 1)
         {
+            rodState = FishingRodState.Ready;
             if(Input.GetKey(KeyCode.Space))
             {
                 ChargeCast();
@@ -61,49 +71,44 @@ public class Bobber : MonoBehaviour
     {
         if(chargeUp)
         {
-            castCharge += .01f;
-            if(castCharge > 18)
+            castCharge += .02f;
+            if(castCharge > maxCastCharge)
             {
                 chargeUp = false;
             }
         }
         else
         {
-            castCharge -= .01f;
-            if(castCharge < 6)
+            castCharge -= .02f;
+            if(castCharge < minCastCharge)
             {
                 chargeUp = true;
             }
         }
 
-        Color col = new Color(castCharge/18,.5f,.5f);
+        Color col = new Color(castCharge/maxCastCharge,.5f,.5f);
         castGauge.color = col;
     }
 
     void CastOut()
     {
-        Vector3 cast = Vector3.forward * castCharge;
-        cast.y = bobber.transform.position.y * -1;
-        bobber.transform.position += cast;
+        castStart = bobber.transform.position;
+        CastPosition();
+        rodState = FishingRodState.Casting;
     }
 
     void CastPosition()
     {
-
-        /* Vector2 screenPos = Input.mousePosition;
-        float widthPercentage = screenPos.x / Screen.width;
-        float heightPercentage  = screenPos.y / Screen.height;
-        float castX = ((maxX - minX) * widthPercentage) - maxX;
+        float powerPercentage = castCharge / maxCastCharge;
+        float castX = planeX;
         float castY = planeY;
-        float castZ = ((maxZ - minZ) * heightPercentage) - maxZ;
-        Vector3 currentCastPointPos = castPoint.transform.position;
-        Vector3 castPos = new Vector3(castX,castY,castZ);
-        Vector3 newPos = castPos - currentCastPointPos;
-        newPos *= .005f;
-        newPos.y = 0f; */
+        float castZ = ((maxZ - minZ) * powerPercentage) - maxZ;
+        castEnd = new Vector3(castX,castY,castZ);
+    }
 
-        //Vector3 currentCastPos = castPoint.transform.position;
-        //Vector3 newPos = Vector3.zero;
+    void Reel()
+    {
+        //Wiggle
         Vector3 rotationZ = rotationPoint.transform.localEulerAngles;
         if(Input.GetKey(KeyCode.Q))
         {
@@ -117,29 +122,21 @@ public class Bobber : MonoBehaviour
             //Rotate Negative Z
             rotationZ = rotationPoint.transform.localEulerAngles + new Vector3(0f,0f,-.05f);
         }
-        if(rotationZ.z > 20 && rotationZ.z < 300) {rotationZ.z = 20;}
-        if(rotationZ.z < 340 && rotationZ.z > 60) {rotationZ.z = 340;}
+        if(rotationZ.z > 2 && rotationZ.z < 300) {rotationZ.z = 2;}
+        if(rotationZ.z < 358 && rotationZ.z > 60) {rotationZ.z = 358;}
         rotationPoint.transform.localEulerAngles = rotationZ;
 
-        //newPos *= .01f;
-        //newPos.y = 0f;
-
-        //castPoint.transform.position += newPos;
-    }
-
-    void Reel()
-    {
         Vector3 currentBobberPos = bobber.transform.position;
         Vector3 castPos = castPoint.transform.position;
 
         Vector3 newPos = castPos - currentBobberPos;
         newPos.Normalize();
 
-
-
-        reelSpeed = Mathf.Clamp(reelSpeed, .001f, .02f);
         newPos *= reelSpeed;
-        //newPos.y = 0f;
+        if(currentBobberPos.z > minZ)
+        {
+            newPos.y = 0f;
+        }
 
         bobber.transform.position += newPos;
     }
