@@ -14,6 +14,10 @@ public class CatalogPanelOnClick : MonoBehaviour
     public Text nameText;
     public Image fishSprite;
     public Text description;
+    public Sprite star1bg;
+    public Sprite star2bg;
+    public Sprite star3bg;
+    public Sprite silhouette;
 
     private void Start()
     {
@@ -23,8 +27,13 @@ public class CatalogPanelOnClick : MonoBehaviour
         exitCatalogButton = GameObject.Find("ExitButton").GetComponent<Button>();
         exitPanelButton = GameObject.Find("PopupExitButton").GetComponent<Button>();
 
+        nameText = GameObject.Find("NameText").GetComponent<Text>();
+        description = GameObject.Find("DescText").GetComponent<Text>();
+        fishSprite = GameObject.Find("FImage").GetComponent<Image>();
+
         nameText.text = "You have not discovered this fish yet!";
         description.text = "You have not discovered this fish yet!";
+        fishSprite.sprite = silhouette;
 
     }
 

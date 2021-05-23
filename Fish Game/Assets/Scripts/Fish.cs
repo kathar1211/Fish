@@ -19,6 +19,8 @@ public class Fish : ScriptableObject
     public float _swimSpeed;
     //how many back and forths does this fish do before it despawns
     public int _swimDuration;
+    [Range(1,3)]
+    public int _starCount;
 }
 
 

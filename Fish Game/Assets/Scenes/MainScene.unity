@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FishTypes:
-  - {fileID: 11400000, guid: a06cca8c698d0f14689ba4c3c0e21f15, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 162e9bce14f5c6741bb0fce511d5c129, type: 2}
   ActiveFish: []
   MaxFish: 5
@@ -1209,7 +1209,7 @@ GameObject:
   - component: {fileID: 7174348005866434475}
   - component: {fileID: 7174348005866434474}
   m_Layer: 5
-  m_Name: Image
+  m_Name: FImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1231,8 +1231,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 193.5, y: 141.2}
+  m_AnchoredPosition: {x: 0, y: 0.0000014305115}
+  m_SizeDelta: {x: 126.9686, y: 129.765}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7174348005866434474
 MonoBehaviour:
@@ -1292,7 +1292,7 @@ GameObject:
   - component: {fileID: 7174348005883545716}
   - component: {fileID: 7174348005883545723}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DescText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1314,8 +1314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.0000076293945, y: 28.68039}
-  m_SizeDelta: {x: 358.7256, y: 57.3608}
+  m_AnchoredPosition: {x: 0.0000038146973, y: 75.027}
+  m_SizeDelta: {x: 184.7, y: 57.3608}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7174348005883545723
 MonoBehaviour:
@@ -1341,7 +1341,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 1
@@ -1409,6 +1409,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 21300000, guid: e391b458639462842826cba53feedf73, type: 3}
+  star2bg: {fileID: 21300000, guid: 51eca0b305e975948b37990b04a7ba6d, type: 3}
+  star3bg: {fileID: 21300000, guid: 183701936c23fae4aa01ca1491d718d2, type: 3}
+  silhouette: {fileID: 21300000, guid: 0afed3e5739eab442b34221282314b22, type: 3}
 --- !u!1 &7174348006577051149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,8 +1529,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 692, y: 0}
-  m_SizeDelta: {x: 539.0518, y: 294.2696}
+  m_AnchoredPosition: {x: 547.9275, y: 0}
+  m_SizeDelta: {x: 250.9069, y: 337.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &7174348007129635441
 CanvasGroup:
@@ -1577,7 +1581,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7174348007129635447}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!1 &7174348007129635447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,7 +1712,7 @@ GameObject:
   - component: {fileID: 7174348007397261051}
   - component: {fileID: 7174348007397261050}
   m_Layer: 5
-  m_Name: Text
+  m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1730,7 +1734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -39.6}
+  m_AnchoredPosition: {x: 0, y: -83}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7174348007397261050
@@ -1757,7 +1761,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 20
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 1
@@ -1982,6 +1986,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256240480174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2269,7 +2277,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8368214257733628442}
   m_Direction: 2
   m_Value: 0.99950755
-  m_Size: 0.38078594
+  m_Size: 0.3807859
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2463,6 +2471,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256266115795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2654,6 +2666,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256294429142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2911,6 +2927,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256545935906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,6 +3141,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256629871836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3274,6 +3298,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256728819633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3427,6 +3455,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256872381818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3616,6 +3648,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256933913287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3769,6 +3805,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214256944521487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3865,6 +3905,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257196396770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4075,6 +4119,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257248452846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4336,6 +4384,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257312671260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4481,6 +4533,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257342301708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4585,6 +4641,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257437460234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4795,6 +4855,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257452039721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5097,6 +5161,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257559315974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5250,6 +5318,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257581499365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5483,6 +5555,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257700240735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5673,6 +5749,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257806171379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5943,6 +6023,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214257835153143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6058,6 +6142,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214258088940723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6160,9 +6248,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8368214258203166414}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!222 &8368214258203166410
 CanvasRenderer:
@@ -6380,6 +6468,10 @@ MonoBehaviour:
   nameText: {fileID: 0}
   fishSprite: {fileID: 0}
   description: {fileID: 0}
+  star1bg: {fileID: 0}
+  star2bg: {fileID: 0}
+  star3bg: {fileID: 0}
+  silhouette: {fileID: 0}
 --- !u!114 &8368214258233833535
 MonoBehaviour:
   m_ObjectHideFlags: 0

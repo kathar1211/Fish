@@ -63,6 +63,19 @@ public class Catalog : MonoBehaviour
             panelList[index].GetComponent<CatalogPanelOnClick>().fishSprite.sprite = fishCaught._fishSprite;
             panelList[index].GetComponent<CatalogPanelOnClick>().description.text = fishCaught._desc;
 
+            switch (fishCaught._starCount)
+            {
+                case 1:
+                    panelList[index].GetComponent<CatalogPanelOnClick>().panel.GetComponent<Image>().sprite = panelList[index].GetComponent<CatalogPanelOnClick>().star1bg;
+                    break;
+                case 2:
+                    panelList[index].GetComponent<CatalogPanelOnClick>().panel.GetComponent<Image>().sprite = panelList[index].GetComponent<CatalogPanelOnClick>().star2bg;
+                    break;
+                case 3:
+                    panelList[index].GetComponent<CatalogPanelOnClick>().panel.GetComponent<Image>().sprite = panelList[index].GetComponent<CatalogPanelOnClick>().star3bg;
+                    break;
+            }
+
             index++;
 
             //change sprite of corresponding panel to the fish's sprite rather than silhouette
